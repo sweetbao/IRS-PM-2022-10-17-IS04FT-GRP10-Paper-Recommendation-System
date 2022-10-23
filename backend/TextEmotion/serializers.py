@@ -1,9 +1,9 @@
 from rest_framework import serializers,generics
-from .models import Tweet
+from .models import Paper
 
-class TweetSerializer(serializers.HyperlinkedModelSerializer):
+class PaperSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Tweet
+        model = Paper
         fields = "__all__"
 
 
