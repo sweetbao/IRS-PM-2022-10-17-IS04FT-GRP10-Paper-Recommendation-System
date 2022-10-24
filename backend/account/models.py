@@ -5,6 +5,7 @@ from django.db import models
 class UserPrefer(models.Model):
     Domain = models.TextField()
     Keywords = models.TextField()
+    PaperID=models.IntegerField()
     comment = models.TextField()
     UserID=models.IntegerField()
     retrievetime = models.DateTimeField( auto_now_add=TRUE)
