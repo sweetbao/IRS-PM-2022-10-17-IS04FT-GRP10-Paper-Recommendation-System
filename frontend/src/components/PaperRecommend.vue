@@ -9,7 +9,7 @@ import { reactive, onMounted, toRefs ,ref } from 'vue'
 
 
 export default {
-  name: 'TextEmotion',
+  name: 'PaperRecommend',
 
  
 

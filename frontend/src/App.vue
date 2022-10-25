@@ -1,6 +1,6 @@
 <script >
 import { RouterLink, RouterView } from 'vue-router'
-import TextEmotion from './components/TextEmotion.vue'
+import PaperRecommend from './components/PaperRecommend.vue'
 import UserHeader from './components/UserHeader.vue'
 import Main from './components/Main.vue'
 
