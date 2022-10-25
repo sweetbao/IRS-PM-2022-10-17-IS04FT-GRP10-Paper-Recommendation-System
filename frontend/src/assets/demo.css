@@ -222,7 +222,7 @@
     background-color: #FF8F5E;
     background-position: center top;
     margin-top: -100px;
-    min-height: 90vh;
+    min-height: fit-content;
 }
 .demo-header-image{
     background-image: url('city.jpg');

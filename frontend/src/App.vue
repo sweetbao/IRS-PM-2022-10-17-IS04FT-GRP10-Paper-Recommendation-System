@@ -1,13 +1,11 @@
 <script >
 import { RouterLink, RouterView } from 'vue-router'
-import PaperRecommend from './components/PaperRecommend.vue'
 import UserHeader from './components/UserHeader.vue'
-import Main from './components/Main.vue'
+import router from './router';
 
 export default {
-  name:'App',
-  components:{
-    Main,
+  name: 'App',
+  components: {
     UserHeader,
 
   }
@@ -16,11 +14,12 @@ export default {
 </script>
 
 <template>
+
   
-     <UserHeader/>
-   
+
 
   <div class="row">
-  <Main/>
+    <UserHeader />
+    <RouterView />
   </div>
 </template>

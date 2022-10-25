@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios'
-import { reactive, onMounted, toRefs ,ref } from 'vue'
+import { reactive, onMounted, toRefs, ref } from 'vue'
 
 
 
@@ -11,31 +11,31 @@ import { reactive, onMounted, toRefs ,ref } from 'vue'
 export default {
   name: 'PaperRecommend',
 
- 
+
 
   setup() {
     let base_url = "http://127.0.0.1:8000/api/TextEmotion/";
     const TE_blank = { url: '', title: '', author: '', comment: '' }
-  
-    
+
+
 
     const state = reactive({
       TE_list: [],
       TextEmotion: Object.assign({}, TE_blank),
-      
-      text:""
+
+      text: ""
     });
 
 
     const getTextEmotion = () => {
-        axios.get(base_url+"?title="+state.text).then(res => {
+      axios.get(base_url + "?title=" + state.text).then(res => {
         state.TE_list = res.data;
         state.TextEmotion = Object.assign({}, TE_blank)
       }).catch(err => {
         console.log(err);
       })
     };
-    
+
 
     const editTE = (item) => {
       state.TextEmotion.url = item.url;
@@ -75,12 +75,12 @@ export default {
       })
     };
 
-   
+
     const Assign = () => {
-     
+
       getTextEmotion()
     };
-  
+
 
 
     onMounted(() => {
@@ -103,12 +103,12 @@ export default {
 
 <template>
 
-            
 
-    <div>{{text}}</div>
+
+  <div>{{ text }}</div>
   <div class="row">
     <div class="col-md-8">
-      <table class="table table-bordered" >
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>title</th>
@@ -119,9 +119,9 @@ export default {
         </thead>
         <tbody>
           <tr v-for="item in TE_list" :key="item.url">
-            <td>{{item.title}}</td>
-            <td>{{item.author}}</td>
-            <td>{{item.comment}}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.author }}</td>
+            <td>{{ item.comment }}</td>
             <td><button class="btn btn-success" tilte="edit" @click="editTE(item)" style="margin:0 10px ;">edit</button>
               <button class="btn btn-danger" title="delete" @click="deleteTE(item)">delete</button>
             </td>
@@ -149,6 +149,6 @@ export default {
     </div>
   </div>
 
- 
+
 </template>
 

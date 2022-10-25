@@ -1,25 +1,35 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import TextEmotion from '../views/HomeView.vue'
-import twoclass from '../views/twoclass.vue'
+import Domain from '../views/DomainView.vue'
+import Keyword from '../views/KeywordView.vue'
+import Myprefer from '../views/Myprefer.vue'
+import Paper from '../views/PaperView.vue'
 
 const routes = [
-  // history: createWebHistory(import.meta.env.BASE_URL),
-  {path:"/",redirect:"/home"},
-  
-    {
-      path: '/home',
-      name: 'home',
-      component: TextEmotion
-    },
-    {
-      path: '/twoclass',
-      name: 'twoclass',
-      component: twoclass
-    }
-  ]
+  {
+    path: "/",
+    name: "Home",
+    component: Domain,
+  },
+  {
+    path: "/keyword",
+    name: "Keyword",
+    component: Keyword,
+  },
+  {
+    path: "/myprefer",
+    name: "Myprefer",
+    component: Myprefer,
+  },
+  {
+    path: "/Paper",
+    name: "Paper",
+    component: Paper,
+  },
+];
 
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
-export const router=createRouter({
-  history:createWebHashHistory(),
-  routes:routes
-})
+export default router;
