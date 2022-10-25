@@ -2,7 +2,7 @@ import urllib.request as libreq
 
 import xmltodict as xmltodict
 
-with libreq.urlopen('http://export.arxiv.org/api/query?search_query=all:electron&start=5&max_results=10') as url:
+with libreq.urlopen('http://export.arxiv.org/api/query?search_query=all:math.GN&start=5&max_results=10') as url:
     r = url.read()
     r = r.decode('utf8').replace("'", '"')
   #  print(r)
