@@ -4,7 +4,7 @@ import xmltodict as xmltodict
 
 
 def storeData():
-    search = ['q-bio.TO','q-fin.CP','q-fin.EC','q-fin.GN','q-fin.MF','q-fin.PM','q-fin.PR','q-fin.RM','q-fin.ST','q-fin.TR','stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH']
+    search = ['stat.ME','stat.ML','stat.OT','stat.TH']
     for tag in search:
         l = 'http://export.arxiv.org/api/query?search_query=all:'+tag+'&start=0&max_results=500'
         with libreq.urlopen(l) as url:
@@ -37,7 +37,7 @@ def storeData():
                     comment = currentPaper['arxiv:comment']['#text'].replace('\n', '')
                     newPaper.comment = comment
                 #      print('comment: ' + str(currentPaper['arxiv:comment']['#text']))
-               # newPaper.save()
+                newPaper.save()
                 print(newPaper.area)
                 print(i)
 
