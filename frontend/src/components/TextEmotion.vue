@@ -102,15 +102,9 @@ export default {
 </script>
 
 <template>
-  <div>
-    <form class="d-flex" role="search"  @submit.prevent="submitFunc">
-    <keep-alive>
-      <input class="form-control me-2" id="search" type="search" placeholder="Search" aria-label="Search"  v-model="text">
-    </keep-alive>
-      <button class="btn btn-outline-success" type="submit" @click="Assign()" >Search</button>
-   
-    </form>
-  </div>
+
+            
+
     <div>{{text}}</div>
   <div class="row">
     <div class="col-md-8">
@@ -154,5 +148,7 @@ export default {
       </div>
     </div>
   </div>
+
+ 
 </template>
 
