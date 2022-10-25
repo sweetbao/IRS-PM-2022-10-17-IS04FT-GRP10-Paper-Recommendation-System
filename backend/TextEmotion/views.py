@@ -1,6 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
+
+from .dataStoreService import storeData
 from .models import Paper
 from .serializers import PaperSerializer
 
@@ -19,4 +22,12 @@ class PaperViewSet(viewsets.ModelViewSet):
             return qs
 
         return super().get_queryset()
+
+
+def addData(request):
+
+    storeData()
+
+
+    return HttpResponse('添加成功')
 
