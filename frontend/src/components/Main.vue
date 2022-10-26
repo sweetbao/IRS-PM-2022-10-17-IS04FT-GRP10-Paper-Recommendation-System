@@ -42,7 +42,7 @@ export default {
 
     </div>
 
-
+  
 
 
 </template>
