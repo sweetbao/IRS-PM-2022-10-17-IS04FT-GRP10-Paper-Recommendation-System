@@ -14,8 +14,6 @@ export default {
         router.push({ name: 'Home' })
       }
 
-   
-
   },
   setup() {
     let base_url = "http://127.0.0.1:8000/";
@@ -44,6 +42,7 @@ export default {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user_id', response.data.user_id)
         localStorage.setItem('name', response.data.user_name)
+        window.location.href = '/'
       }
       ).catch(err => {
         alert("Incorrect username/password");
@@ -79,10 +78,10 @@ export default {
       localStorage.removeItem('token');
       localStorage.removeItem('user_id');
       localStorage.removeItem('name');
-
+      router.push({ name: 'Home' })
     };
 
-
+    
 
 
     onMounted(() => {

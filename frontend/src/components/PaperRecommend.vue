@@ -14,7 +14,7 @@ export default {
 
 
   setup() {
-    let base_url = "http://127.0.0.1:8000/api/TextEmotion/";
+    let base_url = "http://127.0.0.1:8000/api/PaperRecommend/";
     const TE_blank = { url: '', title: '', author: '', comment: '' }
 
 
