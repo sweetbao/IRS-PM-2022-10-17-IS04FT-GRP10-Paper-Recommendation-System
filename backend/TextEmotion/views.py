@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
 
-from .dataStoreService import storeData
+from .dataStoreService import storeData,summaryGet
 from .models import Paper
 from .serializers import PaperSerializer
 
@@ -26,7 +26,8 @@ class PaperViewSet(viewsets.ModelViewSet):
 
 def addData(request):
 
-    storeData()
+    #storeData()
+    summaryGet()
 
 
     return HttpResponse('添加成功')

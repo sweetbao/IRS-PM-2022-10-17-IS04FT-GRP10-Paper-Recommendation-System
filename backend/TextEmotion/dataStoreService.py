@@ -1,6 +1,7 @@
 import urllib.request as libreq
 from .models import Paper
 import xmltodict as xmltodict
+from keybert import KeyBERT
 
 
 def storeData():
@@ -41,4 +42,28 @@ def storeData():
                 print(newPaper.area)
                 print(i)
 
+def get_keywords(doc: str):
+    kw_model = KeyBERT()
+    keywords = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1, 3), top_n=5, use_mmr=True, diversity=0.7)
+    return [keyword[0] for keyword in keywords]
 
+
+def summaryGet():
+
+    allData = Paper.objects.all()
+    summary = []
+    file = open('data1.txt', 'w', encoding='utf-8')
+    count = 0
+    for a in allData:
+        summary.append(a.abstract)
+        file.write(str(count)+'  '+a.abstract + '\n')
+        count = count +1
+    file.close()
+
+    print(len(summary))
+
+
+
+
+
+    return summary
