@@ -11,9 +11,9 @@ const routes = [
     component: Domain,
   },
   {
-    path: "/keyword",
+    path: "/keyword/:topic",
     name: "Keyword",
-    component: Keyword,
+    component: Keyword, props:true
   },
   {
     path: "/myprefer",
@@ -28,7 +28,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
