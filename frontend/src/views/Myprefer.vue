@@ -24,14 +24,18 @@ export default {
 
     const getMyprefer = () => {
       axios.get(base_url + "?userid=" + localStorage.getItem("user_id")).then(res => {
-        
+      
         state.Keyword_list = res.data;
-       
-        if(state.Keyword_list="")
-       {state.Domain=state.Keyword_list[0].Domain} 
+        
+        if(state.Keyword_list!="")
+       {state.Domain=state.Keyword_list[0].Domain;
+      
+      
+      } 
       }).catch(err => {
         console.log(err);
       })
+      
     };
 
     const Reset = () => {

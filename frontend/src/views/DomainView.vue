@@ -20,12 +20,43 @@ export default {
     },
 
     setup() {
+        let base_url = "http://127.0.0.1:8000/api/UserPrefer/"
+    const state = reactive({
+      Keyword_list: [],
+      Domain:''
+    });
 
+    const getMyprefer = () => {
+      axios.get(base_url + "?userid=" + localStorage.getItem("user_id")).then(res => {
+      
+        state.Keyword_list = res.data;
+        
+        if(state.Keyword_list!="")
+       {state.Domain=state.Keyword_list[0].Domain;
+      
+      } 
+      }).catch(err => {
+        console.log(err);
+      })
+      
+    };
+    onMounted(() => {
+      getMyprefer()
+    });
 
+    return {
+      ...toRefs(state),
+      getMyprefer,
+    }
     },
     methods: {
         gotokeyword() {
+            localStorage.setItem('UsePrefer', false);
             router.push({ name: 'Keyword' ,params:{"topic":this.SelectTopic}})
+        },
+        gotoPaper() {
+            localStorage.setItem('UsePrefer', true);
+            router.push({ name: 'Paper'})
         }
 
     },
@@ -117,12 +148,18 @@ label{
 
                     </div>
                   
+                
+                        
+
+
                     <div id="buttons">
+                     
                         <div  style="display:flex;" > 
-                            <button :disabled="SelectTopic=== ''" class="btn btn-fill btn-primary" @click="gotokeyword()" style="margin-left:auto ;">Next</button>
+                            <button v-if="Domain != ''" class="btn btn-fill btn-success" @click="gotoPaper()" style="margin:auto ;">Use my prefer</button>
+                            <button :disabled="SelectTopic=== ''" class="btn btn-fill btn-primary" @click="gotokeyword()" style="margin:auto ;">Next</button>
                          </div>
                  
-
+                         <br/>
                     
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
