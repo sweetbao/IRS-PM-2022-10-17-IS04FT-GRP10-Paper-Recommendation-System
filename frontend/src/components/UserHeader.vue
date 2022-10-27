@@ -78,7 +78,7 @@ export default {
       localStorage.removeItem('token');
       localStorage.removeItem('user_id');
       localStorage.removeItem('name');
-      router.push({ name: 'Home' })
+      window.location.href = '/';
     };
 
     
