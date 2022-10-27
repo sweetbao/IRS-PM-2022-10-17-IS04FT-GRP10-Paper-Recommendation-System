@@ -1,4 +1,5 @@
 import random
+import re
 import urllib.request as libreq
 from .models import Paper
 import xmltodict as xmltodict
@@ -90,13 +91,17 @@ def getDataByArea(area):
 def randomKeywords(area):
     areaData = Paper.objects.filter(area=area)
     a = []
-    print(len(areaData))
+    b = []
     for i in range (0, 10, 1):
         a.append(random.randint(0,len(areaData)))
     for number in a:
-        print(areaData[number])
+        if areaData[number].keywords.startswith(','):
+           areaData[number].keywords = re.sub(r',', '', areaData[number].keywords, count = 1)
+        b.append (areaData[number])
+    for number in b:
+        print(number.keywords)
 
-    return  a
+    return b
 
 
 
