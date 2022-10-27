@@ -12,6 +12,7 @@ class Paper(models.Model):
     publishTime = models.DateTimeField()
     area = models.CharField(max_length=50)
     link = models.CharField(max_length=100)
+    keywords = models.CharField(max_length=100)
 
     class Meta:
         db_table = "Paper"
@@ -20,11 +21,4 @@ class Paper(models.Model):
         return self.title
 
 
-class Keywords(models.Model):
-    content = models.CharField(max_length=50)
-    paper = models.ManyToManyField('Paper',related_name='keywords')
-    class Meta:
-        db_table = "Keywords"
 
-    def __str__(self):
-        return self.name

@@ -1,10 +1,13 @@
+import random
+import re
 import urllib.request as libreq
 from .models import Paper
 import xmltodict as xmltodict
+#from keybert import KeyBERT
 
 
 def storeData():
-    search = ['stat.ME','stat.ML','stat.OT','stat.TH']
+    search = []
     for tag in search:
         l = 'http://export.arxiv.org/api/query?search_query=all:'+tag+'&start=0&max_results=500'
         with libreq.urlopen(l) as url:
@@ -40,5 +43,68 @@ def storeData():
                 newPaper.save()
                 print(newPaper.area)
                 print(i)
+
+def get_keywords(doc: str):
+    kw_model = KeyBERT()
+    keywords = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1, 3), top_n=5, use_mmr=True, diversity=0.7)
+    return [keyword[0] for keyword in keywords]
+
+
+def summaryGet():
+
+    allData = Paper.objects.all()
+    summary = []
+    file = open('data1.txt', 'w', encoding='utf-8')
+    count = 0
+    for a in allData:
+        summary.append(a.abstract)
+        file.write(str(count)+'  '+a.abstract + '\n')
+        count = count +1
+    file.close()
+    print(len(summary))
+
+    return summary
+
+''' this method is one time used and will not be used anymore
+def keywordsGet():
+    allData = Paper.objects.filter(keywords='')
+    print(len(allData))
+    for d in allData:
+        keywordsStr = ''
+        keywords = get_keywords(d.abstract)
+        for words in keywords:
+            if words == '':
+                keywordsStr = str(words)
+            else:
+                keywordsStr = keywordsStr+','+str(words)
+        d.keywords = keywordsStr
+        d.save()
+        print(keywordsStr)'''
+
+
+
+
+def getDataByArea(area):
+    return Paper.objects.filter(area = area)
+
+
+def randomKeywords(area):
+    areaData = Paper.objects.filter(area=area)
+    a = []
+    b = []
+    for i in range (0, 10, 1):
+        a.append(random.randint(0,len(areaData)))
+    for number in a:
+        if areaData[number].keywords.startswith(','):
+           areaData[number].keywords = re.sub(r',', '', areaData[number].keywords, count = 1)
+        b.append (areaData[number])
+    for number in b:
+        print(number.keywords)
+
+    return b
+
+
+
+
 
 
