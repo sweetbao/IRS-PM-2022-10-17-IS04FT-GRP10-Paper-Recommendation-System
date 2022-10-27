@@ -88,7 +88,7 @@ def getDataByArea(area):
 
 
 def randomKeywords(area):
-    areaData = Paper.objects.filter(area='stat.ME')
+    areaData = Paper.objects.filter(area=area)
     a = []
     print(len(areaData))
     for i in range (0, 10, 1):
