@@ -6,7 +6,7 @@ Reference:https://realpython.com/python-virtual-environments-a-primer/
 2. git clone git@github.com:sweetbao/IRS-PM-2022-10-17-IS04FT-GRP10-Paper-Recommendation-System.git
 3. python -m venv venv
 4. venv\Scripts\activate
-source venv/Scripts/activate(mac)
+source venv/bin/activate(mac)
 5. pip install -r requirements.txt
 6. cd backend
 7. python manage.py makemigrations

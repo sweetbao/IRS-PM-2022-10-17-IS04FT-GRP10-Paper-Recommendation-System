@@ -13,7 +13,7 @@ Our team wants to design a paper recommendation system. By using the system, use
 ## SECTION 3 : CREDITS / PROJECT CONTRIBUTION
 | Official Full Name  | Student ID (MTech Applicable)  | Work Items (Who Did What) | Email (Optional) |
 | :--------------- |:---------------:| :-----| :-----|
-| Bao wudi | A0261805H | xxxxxxxxxx yyyyyyyyyy zzzzzzzzzz|  |
+| Bao wudi | A0261805H | System process design, Data feature extraction, Recommendation algorithm design, Model implementation, Model evaluation|E0983199@u.nus.edu  |
 | Dai chujia | A0191582Y | xxxxxxxxxx yyyyyyyyyy zzzzzzzzzz| |
 | Du wenlei | A0243809Y | Data Acquisition,Data Processing,Django & Database development,Interface Development for backend |E0838377@u.nus.edu  |
 | Huang sijie | A0261685W | UI Design, Front-end Development, Video Documentation/Presentation, Project report writing| E0983079@u.nus.edu |
