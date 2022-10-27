@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
 
-from .dataStoreService import storeData,summaryGet,keywordsGet
+from .dataStoreService import storeData, summaryGet,  randomKeywords
 from .models import Paper
 from .serializers import PaperSerializer
 
@@ -28,7 +28,8 @@ def addData(request):
 
     #storeData()
     #summaryGet()
-    keywordsGet()
+    #keywordsGet()
+    randomKeywords('PaperRecommend')
 
 
     return HttpResponse('添加成功')

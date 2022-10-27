@@ -1,7 +1,8 @@
+import random
 import urllib.request as libreq
 from .models import Paper
 import xmltodict as xmltodict
-from keybert import KeyBERT
+#from keybert import KeyBERT
 
 
 def storeData():
@@ -63,7 +64,7 @@ def summaryGet():
 
     return summary
 
-
+''' this method is one time used and will not be used anymore
 def keywordsGet():
     allData = Paper.objects.filter(keywords='')
     print(len(allData))
@@ -77,10 +78,26 @@ def keywordsGet():
                 keywordsStr = keywordsStr+','+str(words)
         d.keywords = keywordsStr
         d.save()
-        print(keywordsStr)
+        print(keywordsStr)'''
 
 
 
 
 def getDataByArea(area):
     return Paper.obects.filter(area = area)
+
+
+def randomKeywords(area):
+    areaData = Paper.objects.filter(area='stat.ME')
+    a = []
+    print(len(areaData))
+    for i in range (0, 10, 1):
+        a.append(random.randint(0,len(areaData)))
+    for number in a:
+        print(areaData[number])
+
+
+
+
+
+
