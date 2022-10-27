@@ -71,7 +71,7 @@ export default {
 </ol>
 
 <div class="tim-title" style="text-align:right">
-  <button class="btn btn-info" type="submit"
+  <button :disabled="Domain==''" class="btn btn-info" type="submit"
                   @click="Reset()">Reset</button>
 </div>
 </template>

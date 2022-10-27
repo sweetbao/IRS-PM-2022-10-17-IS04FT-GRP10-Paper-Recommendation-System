@@ -1,10 +1,9 @@
 <script>
 import axios from 'axios'
-import { reactive, onMounted, toRefs, ref } from 'vue'
-import Main from '../components/Main.vue';
+import { reactive, onMounted, toRefs  } from 'vue'
+import Main from '../components/Main.vue'
 import router from '../router'
 import { useRoute } from 'vue-router'
-
 
 
 
@@ -22,31 +21,46 @@ export default {
     let base_url = "http://127.0.0.1:8000/api/";
     const route = useRoute();
     const Myprefer_blank = { Domain: '', Keywords: '', PaperID: 0, comment: '', UserID: 0 }
-
     const state = reactive({
       Paper_list: [],
       SelectPapers: [],
       Myprefer_list: [],
       selecttopic: "",
-      domain: ""
+      domain: "",
+      Cansaveprefer:"",
+      UserID:""
     });
 
+    const getKeywords = () => {
+      axios.get(base_url + "PaperRecommend/?domain=" + state.domain).then(res => {
 
+        state.Paper_list = res.data;
+      }).catch(err => {
+        console.log(err);
+      })
+
+    };
+
+    const getuserinfo = () => {
+     state.Cansaveprefer=localStorage.getItem('HasPrefer');
+     state.UserID=localStorage.getItem('user_id');
+
+    };
 
     const saveMyprefer = () => {
-      state.SelectPapers.forEach(element => {
-        
-        element=element.replace(/'/g, '"')
+      if(state.SelectPapers[0]!=null)
+      {state.SelectPapers.forEach(element => {
+
+        element = element.replace(/'/g, '"')
 
         let obj = JSON.parse(element);
         let newdata = {
           Domain: state.selecttopic,
           Keywords: obj.Keywords,
-          PaperID: obj.PaperID,
-          comment: obj.comment,
-          UserID: localStorage.getItem('user_id')
+          PaperID: Number(obj.PaperID.slice( obj.PaperID.slice(0,obj.PaperID.length-2).lastIndexOf("/")+1,obj.PaperID.length-1)),
+          comment:"Done",
+          UserID: Number(localStorage.getItem('user_id'))
         };
-        console.log(newdata);
         axios.post(base_url + "UserPrefer/", newdata).then(() => {
           router.push({ name: 'Paper' })
         }).catch(err => {
@@ -54,12 +68,23 @@ export default {
         });
       })
     }
-    
-  
+    else {alert("please select at least one")}
+  };
 
-    
+    const  checkcango = () => {
+     
+     if(state.SelectPapers[0]!=null)
+     {router.push({ name: 'Paper' })}
+      else {
+        alert("please select at least one")
+      }
+    };
 
-    
+
+
+
+
+
 
 
 
@@ -67,55 +92,62 @@ export default {
       let selecttopic = route.params.topic;
       const myArray = selecttopic.split("(");
       state.domain = myArray[0];
-      state.selecttopic = myArray[1]
+      state.selecttopic = myArray[1];
+      getuserinfo();
+      getKeywords();
+      console.log(state.Cansaveprefer)
+      console.log(state.UserID)
     });
 
     return {
       ...toRefs(state),
-      saveMyprefer
+      saveMyprefer,
+      getKeywords,
+      getuserinfo,
+      checkcango
     }
 
   },
-  methods: {
-    gotoPaper() {
-     
-    },
 
-  },
 
 }
-
 </script>
+
+
+<style>
+
+</style>
+
 
 <template>
   <div class="wrapper">
     <div class="main">
       <div class="section">
         <div class="container tim-container">
-          <div class="tim-title">
-            <p>Selected topic: {{ selecttopic }}</p>
-            <h4>Choose one or more keywords combination you like</h4>
+          <div class="tim-title" style="display:flex ;align-items: center;">
+            <p style="width: fit-content;">Selected topic: {{ selecttopic }}</p> 
+            <button style="font-size:24px;margin-left: auto;"  class="btn btn-info" @click="getKeywords()">Refresh <i class="fa fa-refresh"></i></button>
+           
           </div>
-          <input type="checkbox" value="{'Keywords':'test1','PaperID':'1','comment':'test'}" id="markcheckbox1"
-            v-model="SelectPapers">
-          <label class="mark" for="markcheckbox1">markcheckbox1</label>
-          <br>
-          <input type="checkbox" value="{'Keywords':'test2','PaperID':2,'comment':'test'}" id="markcheckbox1"
-            v-model="SelectPapers">
-          <label class="mark" for="markcheckbox1">markcheckbox1</label>
-          <br>
-          <input type="checkbox" value="{'Keywords':'test3','PaperID':3,'comment':'test'}" id="markcheckbox1"
-            v-model="SelectPapers">
-          <label class="mark" for="markcheckbox1">markcheckbox1</label>
-          <br>
+          <h4>Choose one or more keywords combination you like</h4>
 
+          <ul id="Keywords">
+            <li v-for="item in Paper_list"  :key="item.url">
+            
+          <label :ref_for="item.url" class="mark" > 
+             <input :id="item.url" :value="'{\'PaperID\':\''+item.url+'\''+'\,\'Keywords\':\''+item.keywords+'\'}'"   type="checkbox"    v-model="SelectPapers">{{ item.keywords }}</label> 
+          <br>
+            </li>
+          </ul>
 
-          <p>Keywords: {{ SelectPapers }}</p>
         </div>
         <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            <div><a @click="saveMyprefer()"><input type="submit" value="Save as my prefer" /></a></div>
-            <div><a @click="gotoPaper()"><input type="submit" value="submit" /></a></div>
+          <div class="col-md-8 col-md-offset-2" style="display:flex;">
+            <div v-if="UserID != null" style="text-align:left ;width:50% ;"><a  @click="saveMyprefer()">
+              <input :disabled="Cansaveprefer!=''"  type="submit" value="Save as my prefer" ></a></div>
+
+
+            <div style="text-align:right ;width:50% ;"><a @click="checkcango()"><input  type="submit"  value="submit" /></a></div>
           </div>
         </div>
       </div>

@@ -27,17 +27,23 @@ export default {
     });
 
     const getMyprefer = () => {
-      axios.get(base_url + "?userid=" + localStorage.getItem("user_id")).then(res => {
+        if(localStorage.getItem("user_id")!=null)
+      {axios.get(base_url + "?userid=" + localStorage.getItem("user_id")).then(res => {
       
         state.Keyword_list = res.data;
         
         if(state.Keyword_list!="")
        {state.Domain=state.Keyword_list[0].Domain;
-      
+        localStorage.setItem('HasPrefer', state.Domain);
       } 
+      else{
+        localStorage.setItem('HasPrefer', "");
+      }
       }).catch(err => {
         console.log(err);
-      })
+      })}
+    
+
       
     };
     onMounted(() => {
