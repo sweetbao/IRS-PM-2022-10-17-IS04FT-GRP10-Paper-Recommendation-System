@@ -16,14 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from TextEmotion.views import PaperViewSet,addData
+from PaperRecommend.views import PaperViewSet,addData
+from account import views
+from account.views import UserPreferViewSet, UserRecordViewSet
+
 
 router = routers.DefaultRouter()
-router.register(r'TextEmotion', PaperViewSet)
-
+router.register(r'PaperRecommend', PaperViewSet)
+router.register(r'UserPrefer', UserPreferViewSet)
+router.register(r'ViewRecord', UserRecordViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls)),
-    path('testAdd',addData)
+    path('testAdd',addData),
+    path('register/',views.Register.as_view()),
+    path('login/',views.Login.as_view()),
 ]

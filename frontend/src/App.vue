@@ -1,13 +1,11 @@
 <script >
 import { RouterLink, RouterView } from 'vue-router'
-import TextEmotion from './components/TextEmotion.vue'
 import UserHeader from './components/UserHeader.vue'
-
+import router from './router';
 
 export default {
-  name:'App',
-  components:{
-    TextEmotion,
+  name: 'App',
+  components: {
     UserHeader,
 
   }
@@ -16,11 +14,12 @@ export default {
 </script>
 
 <template>
+
   
-     <UserHeader/>
-   
+
 
   <div class="row">
-  <TextEmotion/>
+    <UserHeader />
+    <RouterView />
   </div>
 </template>

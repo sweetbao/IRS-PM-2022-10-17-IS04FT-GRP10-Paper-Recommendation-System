@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'TextEmotion',
+    'PaperRecommend',
     'account',
     'rest_framework.authtoken',
 ]

@@ -52,15 +52,14 @@ class UserPreferViewSet(viewsets.ModelViewSet):
         UserID = self.request.query_params.get("userid", None)
         if UserID:
             qs = UserPrefer.objects.filter()
-            qs = qs.filter(UserID=UserPrefer.UserID)
+            qs = qs.filter(UserID=UserID)
             return qs
 
         return super().get_queryset()
 
     def delete(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        queryset.delete()  # CAREFUL! This could easily delete all the items in this queryset.
-        # You might want some additional checking
+        queryset.delete()  
         return Response(self.get_queryset())
 
 
