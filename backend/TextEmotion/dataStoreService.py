@@ -5,7 +5,7 @@ from keybert import KeyBERT
 
 
 def storeData():
-    search = ['stat.ME','stat.ML','stat.OT','stat.TH']
+    search = []
     for tag in search:
         l = 'http://export.arxiv.org/api/query?search_query=all:'+tag+'&start=0&max_results=500'
         with libreq.urlopen(l) as url:
@@ -59,11 +59,28 @@ def summaryGet():
         file.write(str(count)+'  '+a.abstract + '\n')
         count = count +1
     file.close()
-
     print(len(summary))
 
-
-
-
-
     return summary
+
+
+def keywordsGet():
+    allData = Paper.objects.filter(keywords='')
+    print(len(allData))
+    for d in allData:
+        keywordsStr = ''
+        keywords = get_keywords(d.abstract)
+        for words in keywords:
+            if words == '':
+                keywordsStr = str(words)
+            else:
+                keywordsStr = keywordsStr+','+str(words)
+        d.keywords = keywordsStr
+        d.save()
+        print(keywordsStr)
+
+
+
+
+def getDataByArea(area):
+    return Paper.obects.filter(area = area)
