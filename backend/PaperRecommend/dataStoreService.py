@@ -84,7 +84,7 @@ def keywordsGet():
 
 
 def getDataByArea(area):
-    return Paper.obects.filter(area = area)
+    return Paper.objects.filter(area = area)
 
 
 def randomKeywords(area):
