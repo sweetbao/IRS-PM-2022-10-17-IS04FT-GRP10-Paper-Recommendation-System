@@ -96,6 +96,8 @@ def randomKeywords(area):
     for number in a:
         print(areaData[number])
 
+    return  a
+
 
 
 
