@@ -65,7 +65,7 @@ export default {
             comment: "Done",
             UserID: Number(localStorage.getItem('user_id'))
           };
-          console.log(newdata)
+    
           axios.post(base_url + "UserPrefer/", newdata).then(() => {
             state.PaperID = state.PaperID.join(',');
             alert('saved succeeded');
