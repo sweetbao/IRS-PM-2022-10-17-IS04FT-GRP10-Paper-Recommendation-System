@@ -95,8 +95,11 @@ def randomKeywords(area):
     areaData = Paper.objects.filter(area=area)
     a = []
     b = []
-    for i in range(0, 10, 1):
-        a.append(random.randint(0, len(areaData)))
+    while len(a)<10:
+        number = random.randint(0, len(areaData))
+        if not number in a:
+            a.append(number)
+
     for number in a:
         if areaData[number].keywords.startswith(','):
             areaData[number].keywords = re.sub(r',', '', areaData[number].keywords, count=1)
