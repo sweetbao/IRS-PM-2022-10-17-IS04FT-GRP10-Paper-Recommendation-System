@@ -33,7 +33,7 @@ export default {
     });
 
     const Getpaperlist = () => {
-      axios.get(base_url + "testId/", state.SelectPapers).then(res  => {
+      axios.post(base_url + "testId/", state.SelectPapers).then(res  => {
             conslog.log(res)
           }).catch(err => {
             console.log(err)
