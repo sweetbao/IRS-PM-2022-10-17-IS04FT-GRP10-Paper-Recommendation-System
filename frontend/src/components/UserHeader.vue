@@ -116,7 +116,7 @@ export default {
   <header class="pb-3 mb-4 border-bottom">
     <span class="fs-4">
       <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
+        <div class="container-fluid" >
           <a class="navbar-brand" @click="gotoDomain()">Paper Recommend</a>
 
 
