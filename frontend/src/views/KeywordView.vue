@@ -152,7 +152,7 @@ export default {
 
               <label :ref_for="item.url" class="mark">
                 <input :id="item.url" :value="'{\'PaperID\':\'' + item.url + '\'' + '\,\'Keywords\':\'' + item.keywords + '\'}'"
-                  type="checkbox" v-model="SelectPapers">{{ item.keywords.replace(/,/g, ", ") }}</label>
+                  type="checkbox" v-model="SelectPapers">{{ item.keywords.replace(/,/g, ",  ") }}</label>
               <br>
             </li>
           </ul>
