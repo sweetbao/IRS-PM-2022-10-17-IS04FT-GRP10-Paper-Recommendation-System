@@ -23,7 +23,8 @@ export default {
         let base_url = "http://127.0.0.1:8000/api/UserPrefer/"
     const state = reactive({
       Keyword_list: [],
-      Domain:''
+      Domain:'',
+      PaperID:[],
     });
 
     const getMyprefer = () => {
@@ -31,7 +32,11 @@ export default {
       {axios.get(base_url + "?userid=" + localStorage.getItem("user_id")).then(res => {
       
         state.Keyword_list = res.data;
-        
+        state.Keyword_list.forEach(element => {
+
+            state.PaperID.push(element.PaperID)
+        })
+
         if(state.Keyword_list!="")
        {state.Domain=state.Keyword_list[0].Domain;
         localStorage.setItem('HasPrefer', state.Domain);
@@ -41,11 +46,18 @@ export default {
       }
       }).catch(err => {
         console.log(err);
-      })}
-    
+      })};
 
-      
     };
+
+    
+    const gotoPaper=()=>{
+            localStorage.setItem('UsePrefer', true);
+            state.PaperID=state.PaperID.join(',')
+            router.push({ name: 'Paper', params:{"keywords":state.PaperID}})
+        };
+
+
     onMounted(() => {
       getMyprefer()
     });
@@ -53,6 +65,7 @@ export default {
     return {
       ...toRefs(state),
       getMyprefer,
+      gotoPaper
     }
     },
     methods: {
@@ -60,11 +73,7 @@ export default {
             localStorage.setItem('UsePrefer', false);
             router.push({ name: 'Keyword' ,params:{"topic":this.SelectTopic}})
         },
-        gotoPaper() {
-            localStorage.setItem('UsePrefer', true);
-            router.push({ name: 'Paper'})
-        }
-
+     
     },
 
 
