@@ -5,7 +5,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
 
-from .dataStoreService import storeData, summaryGet,  randomKeywords
+from .dataStoreService import storeData, summaryGet, randomKeywords, testId, getRecommand
 from .models import Paper
 from .serializers import PaperSerializer
 
@@ -30,8 +30,29 @@ def addData(request):
     #storeData()
     #summaryGet()
     #keywordsGet()
-    randomKeywords('stat.ML')
+    #randomKeywords('stat.ML')
+    #testId()
+
 
 
     return HttpResponse('添加成功')
+
+
+class TestPaperViewSet(viewsets.ModelViewSet):
+    queryset = Paper.objects.all().order_by('-retrievetime')
+    serializer_class = PaperSerializer
+
+    def get_queryset(self):
+        ids = self.request.data
+        if ids:
+            qs = getRecommand(ids)
+
+            return qs
+
+        return super().get_queryset()
+
+
+
+
+
 
