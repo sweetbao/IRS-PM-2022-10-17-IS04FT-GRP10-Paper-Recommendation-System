@@ -44,6 +44,8 @@ class TestPaperViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         ids = self.request.data
+        print(ids)
+        print(self.request)
         if ids:
             qs = getRecommand(ids)
 
