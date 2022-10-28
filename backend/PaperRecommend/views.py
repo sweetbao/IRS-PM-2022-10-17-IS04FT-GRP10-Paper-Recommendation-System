@@ -31,7 +31,13 @@ def addData(request):
     #summaryGet()
     #keywordsGet()
     #randomKeywords('stat.ML')
-    testId()
+    #testId()
+   # a = Paper.objects.get(id =99)
+   # print(a.area)
+
+    data = [75192,75099]
+
+    getRecommand(data)
 
 
 
@@ -47,7 +53,7 @@ class TestPaperViewSet(viewsets.ModelViewSet):
         print(ids)
         print(self.request)
         if not ids:
-            qs = randomKeywords('q-fin.MF')
+            qs = getRecommand(ids)
             print(qs)
 
             return qs

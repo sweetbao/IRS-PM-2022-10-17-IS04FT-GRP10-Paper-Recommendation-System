@@ -4,6 +4,7 @@ import urllib.request as libreq
 from .models import Paper
 import xmltodict as xmltodict
 import pandas as  pd
+from .CollaborativeFiltering import proceed_data
 
 
 # from keybert import KeyBERT
@@ -125,19 +126,23 @@ def getRecommand(paperId: list):
     idlist = []
     targetPaper = Paper.objects.get(id = paperId[0])
     area = targetPaper.area
-    paperList = Paper.objects.filter(area)
+    paperList = Paper.objects.filter(area = area)
     for paper in paperList:
         idlist.append(paper.id)
         targetAre = paper.area
         titleList.append(paper.title)
         summaryList.append(paper.abstract)
         KeywordsList.append(paper.keywords)
-    paperList = Paper.objects.filter(targetAre)
     list_tuples = list(zip(titleList,summaryList,KeywordsList))
     dframe = pd.DataFrame(list_tuples,columns=['title','summary','keywords'],index=idlist)
+    recommand = proceed_data(0,paperId,dframe)
+    print(recommand)
+    recommendList = []
+    for i in range(0,10,1):
+        recommendList.append(Paper.objects.get(id= recommand[i][0]))
 
 
 
 
-    return paperList
+    return recommendList
 

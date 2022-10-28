@@ -1,4 +1,6 @@
 import operator
+
+import pandas
 import pandas as pd
 import gensim
 from gensim.corpora.dictionary import Dictionary
@@ -12,7 +14,7 @@ import gzip
 
 
 class ItemBasedCF:
-    def __init__(self, most_similar=30, recommend_num=10):
+    def __init__(self, most_similar=30, recommend_num=15):
         self.N = {}  # number of item user have interacted
         self.W = {}  # similarity matrix to store similarity of item i and item j
 
@@ -68,7 +70,8 @@ class ItemBasedCF:
         """
         @description: caculate similarity between item i and item j
         """
-        sFilePath = "similarityModels"
+
+        sFilePath = os.path.join(os.getcwd(), "PaperRecommend\similarityModels")
         if not os.path.exists(sFilePath):
             os.mkdir(sFilePath)
         print('loading similarity model ...')
@@ -112,7 +115,7 @@ class ItemBasedCF:
                         print("para_sim", para_sim)
 
                         # topic similarity using LDA
-                        topic_sim = topic_similarity(lda_model, corpus_dictionary, paper1['summary'], j['summary'])
+                        topic_sim = topic_similarity(lda_model, corpus_dictionary, paper1['summary'], j['summary'], num_topics=50)
                         print("topic_sim", topic_sim)
 
                         final_sim.append([word_sim, para_sim, topic_sim])
@@ -188,13 +191,13 @@ def topic_similarity(lda, corpus_dictionary, doc1, doc2, num_topics=10):
     except ValueError:
         sim = 0
         # Get the similarity between documents. The larger the similarity, the closer it will be
-    return sim
+    return sim if not pandas.isnull(sim) else 0
 
 
 def get_dictionary(dict_file):
     corpus = []
     if not os.path.exists(dict_file):
-        with open(os.path.join('arxiv_data', 'data_only.txt')) as f:
+        with open(os.path.join(os.getcwd(),'PaperRecommend\\arxiv_data\data_only.txt') )as f:
             w = f.readline()
             while w:
                 corpus.append(word_tokenize(w.strip()))
