@@ -16,13 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from PaperRecommend.views import PaperViewSet,addData
+from PaperRecommend.views import PaperViewSet,addData,TestPaperViewSet
 from account import views
 from account.views import UserPreferViewSet, UserRecordViewSet
 
 
+
 router = routers.DefaultRouter()
 router.register(r'PaperRecommend', PaperViewSet)
+router.register(r'testId',TestPaperViewSet)
 router.register(r'UserPrefer', UserPreferViewSet)
 router.register(r'ViewRecord', UserRecordViewSet)
 

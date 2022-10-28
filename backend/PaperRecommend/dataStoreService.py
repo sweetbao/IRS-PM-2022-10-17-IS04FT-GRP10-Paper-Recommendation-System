@@ -3,13 +3,15 @@ import re
 import urllib.request as libreq
 from .models import Paper
 import xmltodict as xmltodict
-#from keybert import KeyBERT
+
+
+# from keybert import KeyBERT
 
 
 def storeData():
     search = []
     for tag in search:
-        l = 'http://export.arxiv.org/api/query?search_query=all:'+tag+'&start=0&max_results=500'
+        l = 'http://export.arxiv.org/api/query?search_query=all:' + tag + '&start=0&max_results=500'
         with libreq.urlopen(l) as url:
             r = url.read()
             r = r.decode('utf8').replace("'", '"')
@@ -44,6 +46,7 @@ def storeData():
                 print(newPaper.area)
                 print(i)
 
+
 def get_keywords(doc: str):
     kw_model = KeyBERT()
     keywords = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1, 3), top_n=5, use_mmr=True, diversity=0.7)
@@ -51,21 +54,22 @@ def get_keywords(doc: str):
 
 
 def summaryGet():
-
     allData = Paper.objects.all()
     summary = []
     file = open('data1.txt', 'w', encoding='utf-8')
     count = 0
     for a in allData:
         summary.append(a.abstract)
-        file.write(str(count)+'  '+a.abstract + '\n')
-        count = count +1
+        file.write(str(count) + '  ' + a.abstract + '\n')
+        count = count + 1
     file.close()
     print(len(summary))
 
     return summary
 
-''' this method is one time used and will not be used anymore
+
+''' 
+this method is one time used and will not be used anymore
 def keywordsGet():
     allData = Paper.objects.filter(keywords='')
     print(len(allData))
@@ -79,32 +83,45 @@ def keywordsGet():
                 keywordsStr = keywordsStr+','+str(words)
         d.keywords = keywordsStr
         d.save()
-        print(keywordsStr)'''
-
-
+        print(keywordsStr)
+'''
 
 
 def getDataByArea(area):
-    return Paper.objects.filter(area = area)
+    return Paper.objects.filter(area=area)
 
 
 def randomKeywords(area):
     areaData = Paper.objects.filter(area=area)
     a = []
     b = []
-    for i in range (0, 10, 1):
-        a.append(random.randint(0,len(areaData)))
+    while len(a)<10:
+        number = random.randint(0, len(areaData))
+        if not number in a:
+            a.append(number)
+
     for number in a:
         if areaData[number].keywords.startswith(','):
-           areaData[number].keywords = re.sub(r',', '', areaData[number].keywords, count = 1)
-        b.append (areaData[number])
+            areaData[number].keywords = re.sub(r',', '', areaData[number].keywords, count=1)
+        b.append(areaData[number])
     for number in b:
         print(number.keywords)
 
     return b
 
 
+def testId():
+    a = Paper.objects.get(id=764)
+    print(a.title)
+
+    return
 
 
+def getRecommand(paperId: list):
+    paperList = []
+    for id in paperId:
+        paper = Paper.objects.get(id = id)
+        paperList.append(paper)
 
+    return paperList
 
