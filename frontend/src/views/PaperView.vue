@@ -4,7 +4,7 @@ import axios from 'axios'
 import { reactive, onMounted, toRefs, ref } from 'vue'
 import PaperRecommend from '../components/PaperRecommend.vue';
 import router from '../router'
-
+import { useRoute } from 'vue-router'
 
 
 
@@ -19,7 +19,23 @@ export default {
 
 
     setup() {
+      const route = useRoute();
 
+      const state = reactive({
+      Paper_list: [],
+      SelectPapers: [],
+    });
+
+    onMounted(() => {
+      let selecttopic = route.params.keywords;
+      const myArray = selecttopic.split(",");
+      state.SelectPapers = myArray;
+    });
+
+    return {
+      ...toRefs(state),
+
+    }
 
     }
 }
@@ -28,7 +44,7 @@ export default {
 
 <template>
 
-   
+   <div>{{SelectPapers}}</div>
 
 
 

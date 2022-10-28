@@ -21,9 +21,10 @@ const routes = [
     component: Myprefer,
   },
   {
-    path: "/Paper",
+    path: "/Paper/:keywords",
     name: "Paper",
     component: Paper,
+    props:true
   },
 ];
 
