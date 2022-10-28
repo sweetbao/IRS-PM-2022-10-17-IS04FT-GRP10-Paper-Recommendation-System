@@ -3,6 +3,7 @@ import re
 import urllib.request as libreq
 from .models import Paper
 import xmltodict as xmltodict
+import pandas as  pd
 
 
 # from keybert import KeyBERT
@@ -46,12 +47,12 @@ def storeData():
                 print(newPaper.area)
                 print(i)
 
-
+'''
 def get_keywords(doc: str):
     kw_model = KeyBERT()
     keywords = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1, 3), top_n=5, use_mmr=True, diversity=0.7)
     return [keyword[0] for keyword in keywords]
-
+'''
 
 def summaryGet():
     allData = Paper.objects.all()
@@ -112,16 +113,31 @@ def randomKeywords(area):
 
 def testId():
     a = Paper.objects.get(id=764)
-    print(a.title)
+    print(a.id)
 
     return
 
 
 def getRecommand(paperId: list):
-    paperList = []
-    for id in paperId:
-        paper = Paper.objects.get(id = id)
-        paperList.append(paper)
+    titleList = []
+    summaryList = []
+    KeywordsList = []
+    idlist = []
+    targetPaper = Paper.objects.get(id = paperId[0])
+    area = targetPaper.area
+    paperList = Paper.objects.filter(area)
+    for paper in paperList:
+        idlist.append(paper.id)
+        targetAre = paper.area
+        titleList.append(paper.title)
+        summaryList.append(paper.abstract)
+        KeywordsList.append(paper.keywords)
+    paperList = Paper.objects.filter(targetAre)
+    list_tuples = list(zip(titleList,summaryList,KeywordsList))
+    dframe = pd.DataFrame(list_tuples,columns=['title','summary','keywords'],index=idlist)
+
+
+
 
     return paperList
 

@@ -31,7 +31,7 @@ def addData(request):
     #summaryGet()
     #keywordsGet()
     #randomKeywords('stat.ML')
-    #testId()
+    testId()
 
 
 
@@ -46,8 +46,9 @@ class TestPaperViewSet(viewsets.ModelViewSet):
         ids = self.request.data
         print(ids)
         print(self.request)
-        if ids:
-            qs = getRecommand(ids)
+        if not ids:
+            qs = randomKeywords('q-fin.MF')
+            print(qs)
 
             return qs
 
