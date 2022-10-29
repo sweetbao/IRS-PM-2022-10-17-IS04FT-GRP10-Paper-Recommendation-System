@@ -1,4 +1,5 @@
 import json
+import os
 
 from django.core import serializers
 from django.http import HttpResponse
@@ -9,6 +10,7 @@ from rest_framework import generics
 from .dataStoreService import storeData, summaryGet, randomKeywords, testId, getRecommand
 from .models import Paper
 from .serializers import PaperSerializer
+from .CollaborativeFiltering import get_model
 
 
 
@@ -53,7 +55,7 @@ class TestPaperViewSet(viewsets.ModelViewSet):
             id = int(id)
             intId.append(id)
         if ids:
-                qs = getRecommand(intId)
+                qs = getRecommand(intId,word2vec_model)
                 json_data = serializers.serialize('json', qs)
                 return HttpResponse(json_data, content_type="application/json")
         return super().create()
@@ -80,6 +82,13 @@ class TestPaperViewSet(viewsets.ModelViewSet):
 
 
 #def recommendGet(request):
+try:
+    sFilePath = os.path.join(os.getcwd(), "PaperRecommend\similarityModels")
+    if not os.path.exists(sFilePath):
+        os.mkdir(sFilePath)
+    word2vec_model = get_model("word2vec", sFilePath, None)
+except:
+    print('error loading model')
 
 
 

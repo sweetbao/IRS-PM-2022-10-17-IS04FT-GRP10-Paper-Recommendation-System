@@ -66,7 +66,7 @@ class ItemBasedCF:
     #             self.W[i][j] = self.W[i][j] / (self.N[i] * self.N[j]) ** 0.5  # similarity between item i and item j
     #     print('caculating similarity matrix successfully')
 
-    def similarity(self):
+    def similarity(self,model):
         """
         @description: caculate similarity between item i and item j
         """
@@ -75,7 +75,8 @@ class ItemBasedCF:
         if not os.path.exists(sFilePath):
             os.mkdir(sFilePath)
         print('loading similarity model ...')
-        word2vec_model = get_model("word2vec", sFilePath, None)
+      #  word2vec_model = get_model("word2vec", sFilePath, None)
+        word2vec_model = model
         dict_file = os.path.join(sFilePath, "dictionary")
         print('generate dictionary ...')
         corpus_dictionary, corpus = get_dictionary(dict_file)
@@ -257,7 +258,7 @@ def para_similarity(tfidf, corpus_dictionary, doc1, doc2):
     return sim[0][0]
 
 
-def proceed_data(userid, user_favor: list, papers: pd.DataFrame):
+def proceed_data(userid, user_favor: list, papers: pd.DataFrame,model):
     """
 
     :param userid: 0
@@ -276,7 +277,7 @@ def proceed_data(userid, user_favor: list, papers: pd.DataFrame):
         itemBasedCF.train.setdefault(userid, [])
         itemBasedCF.train[userid].append([item, float(rating)])
     itemBasedCF.papers = papers
-    itemBasedCF.similarity()
+    itemBasedCF.similarity(model)
     rec = itemBasedCF.recommendation(userid)
     return rec
 

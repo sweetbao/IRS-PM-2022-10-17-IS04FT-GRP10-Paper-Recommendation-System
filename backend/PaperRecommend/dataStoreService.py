@@ -119,7 +119,7 @@ def testId():
     return
 
 
-def getRecommand(paperId: list):
+def getRecommand(paperId: list,model):
     titleList = []
     summaryList = []
     KeywordsList = []
@@ -135,9 +135,9 @@ def getRecommand(paperId: list):
         KeywordsList.append(paper.keywords)
     list_tuples = list(zip(titleList,summaryList,KeywordsList))
     dframe = pd.DataFrame(list_tuples,columns=['title','summary','keywords'],index=idlist)
-    recommand = proceed_data(0,paperId,dframe)
+    recommand = proceed_data(0,paperId,dframe,model)
     recommendList = []
-    for i in range(0,10,1):
+    for i in range(0,15,1):
         recommendList.append(Paper.objects.get(id= recommand[i][0]))
 
 
