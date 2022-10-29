@@ -33,15 +33,19 @@ Our team wants to design a paper recommendation system. By using the system, use
 
 3. Google Chrome (latest version)
 
+4. Install latest git version
+
 ### [ 2 ] Prepare basic project enviorment and create an virtual enviorment of python
 
-1. git clone git@github.com:sweetbao/IRS-PM-2022-10-17-IS04FT-GRP10-Paper-Recommendation-System.git
+1. Create a folder in computer to storage the project file and open a terminal in this folder:
 
-2. open terminal in the project folder
+ >git clone https://github.com/sweetbao/IRS-PM-2022-10-17-IS04FT-GRP10-Paper-Recommendation-System.git
+
+ >cd IRS-PM-2022-10-17-IS04FT-GRP10-Paper-Recommendation-System
 
  >python -m venv venv
 
- >venv\Scripts\activate(windows) OR: venv/Scripts/activate(mac)
+ >venv\Scripts\activate(windows) OR: source venv/bin/activate(mac)
 
  >pip install -r requirements.txt
 
@@ -49,12 +53,12 @@ Our team wants to design a paper recommendation system. By using the system, use
 
 4. Use the download file replace the old sqlite3 file in backend folder
 
-### [ 3 ] Deploy the Paper Recommendation system locally
+### [ 3 ] Deploy the Paper Recommendation system locally with virtual enviorment just created
 
 1. In project folder terminal: 
  >cd backend
 
- >python manage.py runserver
+ >python manage.py runserver (ignore the migrate error)
 
 2. Open an other terminal in project folder:
 
