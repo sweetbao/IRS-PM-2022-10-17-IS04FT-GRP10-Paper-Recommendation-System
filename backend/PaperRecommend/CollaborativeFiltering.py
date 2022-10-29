@@ -71,7 +71,7 @@ class ItemBasedCF:
         @description: caculate similarity between item i and item j
         """
 
-        sFilePath = os.path.join(os.getcwd(), "PaperRecommend\similarityModels")
+        sFilePath = os.path.join(os.getcwd(), "PaperRecommend", "similarityModels")
         if not os.path.exists(sFilePath):
             os.mkdir(sFilePath)
         print('loading similarity model ...')
@@ -198,7 +198,7 @@ def topic_similarity(lda, corpus_dictionary, doc1, doc2, num_topics=10):
 def get_dictionary(dict_file):
     corpus = []
     if not os.path.exists(dict_file):
-        with open(os.path.join(os.getcwd(),'PaperRecommend\\arxiv_data\data_only.txt') )as f:
+        with open(os.path.join(os.getcwd(),'PaperRecommend', 'arxiv_data', 'data_only.txt') )as f:
             w = f.readline()
             while w:
                 corpus.append(word_tokenize(w.strip()))

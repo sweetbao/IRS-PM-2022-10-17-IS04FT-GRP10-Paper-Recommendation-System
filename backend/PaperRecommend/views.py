@@ -11,6 +11,7 @@ from .dataStoreService import storeData, summaryGet, randomKeywords, testId, get
 from .models import Paper
 from .serializers import PaperSerializer
 from .CollaborativeFiltering import get_model
+import nltk
 
 
 
@@ -80,10 +81,10 @@ class TestPaperViewSet(viewsets.ModelViewSet):
         return super().post_queryset()'''
 
 
-
+nltk.download('punkt')
 #def recommendGet(request):
 try:
-    sFilePath = os.path.join(os.getcwd(), "PaperRecommend\similarityModels")
+    sFilePath = os.path.join(os.getcwd(), "PaperRecommend/similarityModels")
     if not os.path.exists(sFilePath):
         os.mkdir(sFilePath)
     word2vec_model = get_model("word2vec", sFilePath, None)
