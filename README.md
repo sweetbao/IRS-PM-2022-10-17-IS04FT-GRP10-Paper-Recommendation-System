@@ -14,7 +14,7 @@ Our team wants to design a paper recommendation system. By using the system, use
 | Official Full Name  | Student ID (MTech Applicable)  | Work Items (Who Did What) | Email (Optional) |
 | :--------------- |:---------------:| :-----| :-----|
 | Bao Wudi | A0261805H | System process design, Data feature extraction, Recommendation algorithm design, Model implementation, Model evaluation|E0983199@u.nus.edu  |
-| Dai Chujia | A0191582Y | Team Lead，Architecture and System Design，Backend Application Development，UI/UX Development，Frontend development，Testing of frontend and backend integration| E0338226@u.nus.edu |
+| Dai Chujian | A0191582Y | Team Lead，Architecture and System Design，Backend Application Development，UI/UX Development，Frontend development，Testing of frontend and backend integration| E0338226@u.nus.edu |
 | Du Wenlei | A0243809Y | Data Acquisition,Data Processing,Django & Database development,Interface Development for backend |E0838377@u.nus.edu  |
 | Huang Sijie | A0261685W | UI Design, Front-end Development, Video Documentation/Presentation, Project report writing| E0983079@u.nus.edu |
 
