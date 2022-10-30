@@ -2,6 +2,7 @@
 Read paper every day!！^0^！ The project provides a recommendation system for papers in your interest area.
 ## SECTION 1 : PROJECT TITLE
 ## Paper Recommendation System
+![image](https://user-images.githubusercontent.com/38468080/198875665-3be3523f-a809-4e47-ab8a-dc4226b577ce.png)
 
 ## SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT
 Reference papers and documents are extremely important for academic research, practical operations, and rich our experience. It can not only help students or scholars to enrich their knowledge in this field and keep up with the latest research progress, but also inspire and help follow-up research or topics. According to arXiv’s Category Taxonomy, the current research types can be roughly divided into nine categories: Computer Science, Economics, Electrical Engineering and Systems Science, Mathematics, Physics, Quantitative Biology, Quantitative Finance, and Statistics. Under each category, there are multipl research directions in each field, and each research direction has dozens or even hundreds of keywords. The sheer variety of papers and the abundance of keywords in each subfield make finding interested papers in a certain field becoming a problem.
