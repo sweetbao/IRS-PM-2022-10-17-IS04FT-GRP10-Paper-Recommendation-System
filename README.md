@@ -23,7 +23,7 @@ Our team wants to design a paper recommendation system. By using the system, use
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 
 
-## SECTION 5 : USER GUIDE
+## SECTION 5 : Installation and User Guide
 
 ### [ 1 ] System Environment Requirement
 
