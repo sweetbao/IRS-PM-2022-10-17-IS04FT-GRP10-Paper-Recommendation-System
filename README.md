@@ -49,9 +49,9 @@ Our team wants to design a paper recommendation system. By using the system, use
 
  >pip install -r requirements.txt
 
-3. go to download sqlite3 https://drive.google.com/file/d/1Wx-D0MNJ-t3G0dlp2LwvJEfDTWxXHP5p/view
+2. go to download sqlite3 https://drive.google.com/file/d/1Wx-D0MNJ-t3G0dlp2LwvJEfDTWxXHP5p/view
 
-4. Use the download file replace the old sqlite3 file in backend folder
+3. Use the download file replace the old sqlite3 file in backend folder
 
 ### [ 3 ] Deploy the Paper Recommendation system locally with virtual enviorment just created
 
